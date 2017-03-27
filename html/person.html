@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付页面</title>
+		<link rel="stylesheet" type="text/css" href="../css/page.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	</head>
+	<body class="bg_grey person">
+		<div class="account-balance">
+			<!--公共头部开始-->
+		<div class="download-top wx-top">
+			<div class="download-con">
+	            <a href="#" class="set-up">
+	            	<i class="icon-setting"></i>
+	            </a>
+				<span>我的</span>
+				 <a  href="#" class="messages">
+	            	<i class="icon-message"></i>
+	            </a>
+			</div>
+		</div>
+		<!--公共头部结束-->
+			<div class="balance-top">
+				<div class="balance-top-cont">
+					<div class="balance-top-img">
+						<!--头像的链接-->
+						<a href="#">
+							<img src="../images/images-pic.png" alt="" />
+						</a>
+					</div>
+					<div class="balance-top-txt">
+						<!--昵称的链接-->
+						<a href="#">
+							<h3>欢乐的小逗比</h3>
+						</a>
+						<!--绑定的手机的链接-->
+						<a href="#">
+							<p class="phone-tiped"><i class="icon-protect"></i>手机号已绑定</p>
+						</a>
+					</div>
+					<div class="clearboth"></div>
+				</div>
+			</div>
+			<div class="balance-ban">
+				<div class="balance-ban-cont">
+					<ul>
+						<li>
+							<a href="#" class="person-image">
+								<span class="icon-indiana-record icon-index"></span>
+								夺宝记录
+								<span class="arrow-detial"></span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="icon-lucky-record icon-index"></span>
+								幸运记录
+								<span class="arrow-detial"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="balance-ban-cont">
+					<ul>
+						<li>
+							<a href="#" class="person-image">
+								<span class="icon-common-issure icon-index"></span>
+								常见问题
+								<span class="arrow-detial"></span>
+							</a>
+						</li>
+						<li>
+							<a href="#">
+								<span class="icon-about-us icon-index"></span>
+								关于我们
+								<span class="arrow-detial"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+		</div>
+		<!--弹层样式-->
+		<div class="balance-serv-tel">
+		    	<div class="balance-serv-bg"></div>
+		    	<div class="balance-serv-cont">
+		    		<div class="sevice-cont">
+		    			<p class="quit-nwz">
+		    				
+		    				您确认要退出纳5折？
+		    			</p>
+		    			<div class="serv-sure">
+		    				<ul>
+		    					<li class="serv-sure-btn"><a href="{:U('Weixin/User/logout')}">确认</a></li>
+		    				    <li class="service-line"></li>
+		    				    <li class="serv-cancel-btn">取消</li>
+		    				</ul>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+	</body>
+	</html>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+   $(function(){
+   	   var imgWidth  = $('.balance-top-img a').width();
+   	   var bwidth =  $('.balance-top').width();
+       var bheight = bwidth*0.29;
+       $('.balance-top').css({"height":bheight+'px'})
+        $('.balance-top-img a').height(imgWidth)
+   });
+   
+   $(window).resize(function(){
+   	   var imgWidth  = $('.balance-top-img a').width();
+   	   var bwidth =  $('.balance-top').width();
+       var bheight = bwidth*0.29;
+       $('.balance-top').css({"height":bheight+'px'})
+        $('.balance-top-img a').height(imgWidth)
+   });
+    </script>
+    <script type="text/javascript">
+     $('.serv-cancel-btn').click({
+       	$('.balance-serv-tel').show();
+       });
+    </script>
+ 

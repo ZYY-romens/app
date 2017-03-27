@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>支付页面</title>
+		<link rel="stylesheet" type="text/css" href="../css/page.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	</head>
+	<body class="bg_grey">
+		<div class="container" id="container">
+			<!--加载-->
+			 <div class="loading-warp">
+			 	<div class="loading-warp-con">
+			 		<img src="../images/loading.gif" />
+				    <span class="text">重新加载数据</span>
+			 	</div>
+             </div>
+			<div class="payment-detial-top">
+				<p>
+					<i class="icon-pay-clock"></i>
+					订单提交成功，只差最后一步支付，就成功参与啦！<br>
+					请您在15：00：00内完成支付，否则本次订单将取消！
+				</p>
+			</div>
+			<div class="payment-detial-cont">
+				<div class="payment-content">
+					<div class="indiana-record">
+	                 	<div class="indiana-record-left">
+	                 		<img src="../images/pay-reword.jpg" alt="" />
+	                 	</div>
+	                 	<div class="indiana-record-right">
+	                 		<h3>苹果(Apple)iPhone 6s 手机128G</h3>
+	                 		<div>
+	                 			<p>总需：<span class="lucky-red">1846113</span>人次</p>
+	                 			<div class="total-remain">
+	                 				<p class="total">剩余：<span  class="remainNum lucky-blue">10</span></p>
+	                 			</div>
+	                 		</div>
+	                 	</div>
+	                 	<div class="clearboth"></div>
+				    </div>
+				    <div class="tb-stock-cont">
+				    	<div class="tb-stock-left">
+				    		<div class="tb-stock">
+				    			<a class="tb-reduce" href="#" id="reduce">-</a>
+				    			<input type="tel" name="" id="num"  value="1" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"  />
+				    			<a class="tb-increase" href="#" id="increase">+</a>
+				    		</div>
+				    		<p class="lucky-red">全买将自动调整为剩余人次</p>
+				    	</div>
+				    	<div class="tb-stock-right">
+				    		<a class="buyAll" href="javascript:;">全买</a>
+				    	</div>
+				    	<div class="clearboth"></div>
+				    </div>
+				</div>
+				
+			</div>
+			<div class="payment-detial-cont">
+				<div class="payment-content">
+					<div class="payment-way">
+						<ul>
+							<li>
+								<p><img src="../images/paymentBywx.png"/>微信支付</p>
+								<span class="checked"></span>
+							</li>
+							<li>
+								<p><img src="../images/paymentByzfb.png"/>支付宝支付</p>
+								<span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="payment-finally">
+				<div class="payment-finally-cont">
+					<p>
+						实际付款：
+					    <span class="lucky-red"><i class="actual-pay">1</i>元</span>
+				    </p>
+			        <a href="javascript:;" id="paymentent" class="go-to-pay">结算</a>
+				</div>
+			</div>
+	   </div>
+	</body>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>	
+	<script type="text/javascript" src="../js/touche.js"></script>	
+	<script type="text/javascript" src="../js/p-pull-refresh.js"></script>	
+	<script type="text/javascript">
+	
+	var $statu = $('.loading-warp .text');
+
+	var pullRefresh = $('.container').pPullRefresh({
+		$el: $('.container'),
+		$loadingEl: $('.loading-warp'),
+		sendData: null,
+		url: ' ',
+		autoHide: true,
+		callbacks: {
+			pullStart: function(){
+				$statu.text('松开开始刷新');
+			},
+			start: function(){
+				$statu.text('数据刷新中···');
+			},
+			success: function(response){
+				$statu.text('数据刷新成功！');
+			},
+			end: function(){
+				$statu.text('下拉刷新结束');
+			},
+			error: function(){
+				$statu.text('找不到请求地址,数据刷新失败');
+			}
+		}
+	});
+
+	// pullRefresh.setDestroy(true);
+	
+</script>
+	<script type="text/javascript">
+	$(function(){
+//		选择支付方式
+		var checked = $('.payment-way ul li').find('span');
+	    checked.each(function(){
+			$(this).click(function(){
+				if($(this).hasClass('checked')){
+					$(this).removeClass('checked');
+				}else{
+	                  $(this).parents('li').siblings().find('span').removeClass('checked');
+					$(this).addClass('checked');
+					
+				}
+			});
+		});
+//		点击增加减少购买数量
+        var inputTxt =	$('input[type=tel]').val();
+		var remain = $.trim($('.remainNum').text());
+		var remainNum =  parseInt(remain);  
+		    function change(a){
+				var txtNum = parseInt($('input[type=tel]').val());
+				$('input[type=tel]').val(txtNum+a);
+				return;
+		    };
+//		    点击增加购买数量
+		    $('#increase').click(function(){
+				$('.tb-stock a').removeClass('unclick');
+				var inputTxt =	$('input[type=tel]').val();
+			
+					if(inputTxt >= remainNum){
+						$(this).addClass('unclick');
+					}else{
+						change(1);
+						$('#num').data('num',parseInt(inputTxt)+1).trigger('change');
+					}
+			});
+//			点击减少购买数量
+			$('#reduce').click(function(){
+				$('.tb-stock a').removeClass('unclick');
+				var inputTxt =	$('input[type=tel]').val();
+				
+				    if(inputTxt >1){  
+				        change(-1);
+				        $('#num').data('num',parseInt(inputTxt)-1).trigger('change');
+				    }else{  
+				        $(this).addClass('unclick');
+				    }
+			});
+			$("#num").blur(function(){
+				var _self = $(this);
+				var dataNum = _self.data('num');
+				if(dataNum==""){
+					_self.data('num',1).val(1);
+				}else{
+					if(dataNum>remainNum){
+						_self.data('num',remainNum).val(remainNum);
+					}else{
+						_self.data('num',_self.val());
+					}
+					
+				}
+				_self.trigger('change');
+			}).keyup(function(){
+				$(this).data('num',$(this).val()).trigger('change');
+			})
+			
+			$("#num").change(function(){
+				var dataNum = $('#num').data('num');
+					$('.actual-pay').text(dataNum);
+				
+				
+				
+			})
+			
+//			全买操作
+			$('.buyAll').click(function(){
+				$('input[type=tel]').val(remainNum);
+				$('.actual-pay').text(remainNum);
+			});
+			
+			
+//			$.ajax({
+//	      			type:"post",
+//	      			url:"",
+//	      			data:{ },
+//	      			success: function(data){
+//	      				
+//	      			}
+//	      		});
+	});
+	</script>
+</html>

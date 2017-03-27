@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>58元红包</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../css/pocket.css" />
+		<style type="text/css">
+		.money-act-cont li{position: relative;}
+			.money-act-cont li>img{display: block;width:100%;}
+			.money-position-login{width:100%;position: absolute;top:68%}
+			.money-position-register{width:100%;position: absolute;top:58%}
+			.logo-img{position: absolute;top:6%;width:100%;z-index: 2222;}
+			.logo-img a img{display: block;width:30%;margin:0 auto}
+		</style>
+	</head>
+	<body style="background: #FFF7E4;">
+			
+	    <div class="logo-img">
+		    <a href="#"><img src="../images/red-logo.png" alt="" /></a>
+		</div>
+	    <div class="money-act-cont">
+	    	<ul>
+				<li>
+					<img src="../images/red-pocket01.jpg" alt="" />
+					<div class="money-position-login">
+						<div class="money-act-login">
+							<div class="money-act-txt">
+								 <input type="tel" name="mobile" id="mobile"  maxlength="11" placeholder="请输入手机号领取" oninput="if(value.length>11)value=value.slice(0,11)" data-validate="phone" data-describedby="phone-description"/>
+								 <i></i>
+							</div>
+							<input type="submit" id="user_step" class="money-act-btn"  value="立即领取" />
+							<p>仅限汇盈金服新用户参与</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<img src="../images/red-pocket02.jpg" alt="" />
+					<div class="money-position-register">
+						<div class="money-act-register">
+							<div class="send-code">
+								验证码已发至
+								<span>15712487857</span>
+								<a href="#" class="return-change">返回修改</a>
+							</div>
+							<div class="money-act-txt money-act-code">
+						        <input type="number" name="code" id="code" class="input-code"  maxlength="6" placeholder="请输入验证码" oninput="if(value.length>6)value=value.slice(0,6)" data-descriptions="phoneyzm" data-conditional="phoneyzm"/>
+					            <span class="sendCode" id="getver J-register-getcode">发送验证码</span>
+					            <i class="correct-yz"></i>
+					        </div>
+					        <div class="money-act-txt">
+						        <input type="password" id="password" name="pwd"   minlength="6" maxlength="16" placeholder="请设置登录密码"  oninput="if(value.length>16)value=value.slice(0,16)" data-validate="pwd" data-describedby="pwd-description"/>
+						        <i class="correct-pwd"></i>
+					        </div>
+					        <input type="submit" class="money-act-btn" id="user_info" value="立即使用" />
+					        <p>App登陆后于“我的优惠券”中查看</p>
+					    </div>
+					</div>
+				</li>
+			<div class="clearboth"></div>
+		</ul>
+	</div>
+		<!--弹层1-->
+		<div class="balance-pocket-1 balance-serv-tel">
+		    	<div class="balance-serv-bg"></div>
+		    	<div class="balance-serv-cont">
+		    		<div class="sevice-cont">
+		    			<p>
+		    				本活动仅限新用户参与<br>
+		    				您是老用户不能参与此活动
+		    			</p>
+		    			<div class="serv-sure">
+		    				去投资
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+			<!--弹层2-->
+		    <div class="balance-pocket-2 balance-serv-tel">
+		    	<div class="balance-serv-bg"></div>
+		    	<div class="balance-serv-cont">
+		    		<div class="sevice-cont">
+		    			<p>
+		    				您已领过现金红包啦！<br>
+		    				App登录后于“我的优惠券”中查看
+		    			</p>
+		    			<div class="serv-sure">
+		    				<ul>
+		    					<li class="serv-sure-btn"><a href="#">确定</a></li>
+		    				    <li class="service-line"></li>
+		    				    <li class="serv-cancel-btn">去App查看</li>
+		    				</ul>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+	</body>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>	
+	
+	<script type="text/javascript">
+		/*validate */
+	$(function(){
+        var $wWidth = $(window).width();
+        var mUl =  $(".money-act-cont ul");
+        var mLi = $(".money-act-cont ul li");
+        var time = 200;
+	        mLi.width($wWidth);
+            mUl.width($wWidth*2);
+            mLi.width($wWidth);
+        var width = mLi.width();
+        
+        function changeHeight(e){
+	        $(".money-act-cont ul").animate({left:-e+'px'},time);
+        }
+//      返回上一步
+        $('.return-change').click(function(){
+	     	$('.money-act-txt>i').text('');
+	     	changeHeight(0);
+        });
+        
+//      验证手机号
+        $('#user_step').click(function(){
+        	$('.money-act-txt>i').text('');
+	    	var mobile = $("#mobile").val();
+		    var checkNum = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-3,5-9]{1})|(17[0,1,3,5-8]{1})|(18[0-9]{1}))+\d{8})$/.test(mobile);
+	      		if(checkNum){
+	      			changeHeight(width);
+	      		}else{
+	      			$(this).siblings('.money-act-txt').find('i').text('*请输入正确的手机号')
+	      			changeHeight(0);
+	      		}
+//	      	    传手机号
+//	      		$.ajax({
+//	      			type:"post",
+//	      			url:"",
+//	      			data:{"mobile":},
+//	      			success: function(data){
+//	      				如果手机号已经注册，提示信息仅限新用户注册
+//	      				if(){
+//	      					$('.balance-pocket-1').show();
+//	      				}
+//	      			}
+//	      		});
+        });
+    
+//      验证密码和验证码
+		$('#user_info').click(function(){
+			var code =  $("#code").val();
+			var pwd = $('#password').val();
+			var checkPwd = /^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z]{1}[0-9A-Za-z]{5,16}$/.test(pwd);
+		     	if(code.length<6){
+		     		$('.correct-yz').text('*请输入正确的验证码');
+		     	}else{
+		     		$('.correct-yz').text('');
+		     	};
+		     	if(!checkPwd){
+		     		$('.correct-pwd').text('*首位为字母，6-16位，数字和字母组合，区分大小写');
+		     	}else{
+		     		$('.correct-pwd').text('');
+		     	}
+		     	
+//		     	传密码和验证码
+//	      		$.ajax({
+//	      			type:"post",
+//	      			url:"",
+//	      			data:{"code": ,"pwd":},
+//	      			success: function(data){
+//	      				如果手机号已经注册，提示信息仅限新用户注册
+//	      				if(){
+//	      					$('.balance-pocket-1').show();
+//	      				}
+//	      			}
+//	      		});
+		});
+
+});
+	/*validate end*/		
+	$(function(){
+		  //获取验证码的url地址
+			var  remainingTime = 60;//倒计时时间
+			var timerClock = null;
+//	        var getver = function(){
+//	      			if($(".sendCode").text()=="发送验证码"){
+//	      				$.ajax({
+//			    		    type: "POST",
+//			    		    url: " ",
+//			    		    data:{""},
+//			    		    success: function(msg){
+//			    			    if(msg!=""){
+//			    			        $.mvalidateTip(msg);
+//			    			    }else{
+//			    			   		$.mvalidateTip("短信发送成功！");
+//			    			   		startTimerClock()
+//			    			    }
+//			    		    }
+//			    		});
+//	      			}
+//	        }
+	      $(".sendCode").on("click",getver);
+		  //倒计时
+		  //开始计时器
+		function startTimerClock(){
+			clearTimeout(timerClock);
+			if(remainingTime <= 0){
+			endTimerClock();
+			return;
+			}
+			$(".sendCode").attr('disabled','disabled');
+			$(".sendCode").css({"background":"#a3a3a3"});
+			$(".sendCode").text("重新获取(" + remainingTime + "s)");
+			timerClock = setTimeout(function(){
+			startTimerClock();
+			remainingTime--;
+			}, 1000);
+		};
+		//结束计时器
+		function endTimerClock(){
+			clearTimeout(timerClock);
+			isTimeing = false;//重置倒计时状态
+			$(".sendCode").removeAttr('disabled');
+			$(".sendCode").css({"background":"#ff3d30"});
+			$(".sendCode").text("发送验证码");
+			remainingTime = 60;
+		};
+});
+	</script>
+</html>
